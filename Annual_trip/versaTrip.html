@@ -1,0 +1,1156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Versa Meghalaya Adventure</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+--green:#7fbc43;
+--blue:#029ad6;
+--bg:#f7fafc;
+--card:#ffffff;
+--text:#1a202c;
+--shadow:0 10px 30px rgba(0,0,0,.08);
+}
+
+.dark{
+--bg:#08111d;
+--card:#111827;
+--text:#f5f5f5;
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',Segoe UI,sans-serif;
+}
+
+body{
+background:var(--bg);
+color:var(--text);
+transition:.3s;
+}
+
+html{
+scroll-behavior:smooth;
+}
+
+nav{
+position:fixed;
+top:0;
+width:100%;
+background:rgba(255,255,255,.85);
+backdrop-filter:blur(16px);
+z-index:1000;
+padding:16px 20px;
+box-shadow:0 2px 20px rgba(0,0,0,.06);
+border-bottom:1px solid rgba(0,0,0,.05);
+}
+
+.dark nav{
+background:#08111dcc;
+}
+
+.nav-container{
+display:flex;
+justify-content:space-between;
+align-items:center;
+max-width:1400px;
+margin:auto;
+gap:20px;
+}
+
+.logo{
+font-size:1.5rem;
+font-weight:800;
+letter-spacing:1px;
+background:linear-gradient(90deg,var(--blue),var(--green));
+-webkit-background-clip:text;
+background-clip:text;
+color:transparent;
+}
+
+.menu{
+display:flex;
+gap:28px;
+flex-wrap:wrap;
+align-items:center;
+}
+
+.menu a{
+text-decoration:none;
+color:var(--text);
+font-weight:600;
+position:relative;
+padding-bottom:4px;
+transition:.3s;
+}
+
+.menu a::after{
+content:"";
+position:absolute;
+left:0;
+bottom:0;
+width:0;
+height:2px;
+background:linear-gradient(90deg,var(--blue),var(--green));
+transition:.3s;
+}
+
+.menu a:hover{
+color:var(--blue);
+}
+
+.menu a:hover::after{
+width:100%;
+}
+
+.theme-btn{
+background:linear-gradient(90deg,var(--blue),var(--green));
+color:white;
+border:none;
+width:42px;
+height:42px;
+border-radius:50%;
+cursor:pointer;
+font-size:1.2rem;
+display:flex;
+align-items:center;
+justify-content:center;
+transition:.3s;
+}
+
+.theme-btn:hover{
+transform:translateY(-2px);
+box-shadow:0 10px 20px rgba(2,154,214,.3);
+}
+
+.hero{
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+padding:100px 30px;
+position:relative;
+overflow:hidden;
+background:linear-gradient(135deg,#029ad6 0%,#7fbc43 100%);
+background-size:200% 200%;
+animation:heroShift 14s ease infinite;
+color:white;
+text-align:center;
+}
+
+@keyframes heroShift{
+0%{background-position:0% 50%}
+50%{background-position:100% 50%}
+100%{background-position:0% 50%}
+}
+
+.hero::before{
+content:"";
+position:absolute;
+inset:0;
+background-image:
+radial-gradient(circle at 15% 20%,rgba(255,255,255,.18) 0,transparent 40%),
+radial-gradient(circle at 85% 80%,rgba(255,255,255,.14) 0,transparent 40%);
+pointer-events:none;
+}
+
+.hero-content{
+max-width:900px;
+position:relative;
+z-index:1;
+}
+
+.hero h1{
+font-size:clamp(2.5rem,5vw,5rem);
+margin-bottom:15px;
+font-weight:800;
+position:relative;
+display:inline-block;
+background:linear-gradient(100deg,#ffffff 30%,#fff8dc 45%,#ffffff 55%,#ffffff 60%,#fff8dc 75%,#ffffff 90%);
+background-size:250% auto;
+-webkit-background-clip:text;
+background-clip:text;
+-webkit-text-fill-color:transparent;
+color:transparent;
+text-shadow:0 4px 25px rgba(0,0,0,.2);
+animation:shine 5s linear infinite;
+}
+
+@keyframes shine{
+to{background-position:-250% center;}
+}
+
+.hero h1::before,
+.hero h1::after{
+content:"✨";
+position:absolute;
+font-size:1.6rem;
+-webkit-text-fill-color:initial;
+animation:twinkle 2.2s ease-in-out infinite;
+}
+
+.hero h1::before{
+top:-10px;
+left:-30px;
+}
+
+.hero h1::after{
+bottom:-5px;
+right:-30px;
+animation-delay:1.1s;
+}
+
+@keyframes twinkle{
+0%,100%{opacity:0;transform:scale(.5) rotate(0deg);}
+50%{opacity:1;transform:scale(1.2) rotate(15deg);}
+}
+
+.hero p{
+font-size:1.2rem;
+margin-bottom:20px;
+opacity:.95;
+}
+
+.countdown{
+display:inline-block;
+padding:15px 30px;
+background:white;
+color:#029ad6;
+border-radius:20px;
+font-weight:bold;
+font-size:1.3rem;
+box-shadow:0 15px 35px rgba(0,0,0,.2);
+transition:.3s;
+cursor:default;
+}
+
+.countdown:hover{
+transform:translateY(-4px);
+box-shadow:0 20px 45px rgba(0,0,0,.25);
+}
+
+.digital-clock{
+display:flex;
+justify-content:center;
+gap:15px;
+flex-wrap:wrap;
+background:#0a1520;
+padding:25px 30px;
+border-radius:20px;
+box-shadow:var(--shadow);
+margin-bottom:40px;
+}
+
+.clock-unit{
+text-align:center;
+color:white;
+}
+
+.clock-unit span{
+display:block;
+font-family:'Courier New',monospace;
+font-size:2.2rem;
+font-weight:800;
+background:#050b12;
+color:var(--blue);
+padding:10px 14px;
+border-radius:10px;
+min-width:70px;
+text-shadow:0 0 10px rgba(2,154,214,.6);
+}
+
+.clock-unit.big span{
+font-size:3rem;
+color:var(--green);
+padding:14px 18px;
+text-shadow:0 0 14px rgba(127,188,67,.7);
+}
+
+.clock-unit small{
+display:block;
+margin-top:8px;
+font-size:.8rem;
+letter-spacing:1px;
+text-transform:uppercase;
+opacity:.7;
+}
+
+.section{
+padding:80px 5%;
+max-width:1400px;
+margin:auto;
+}
+
+.title{
+font-size:2.2rem;
+font-weight:700;
+margin-bottom:50px;
+text-align:center;
+position:relative;
+padding-bottom:16px;
+}
+
+.title::after{
+content:"";
+position:absolute;
+bottom:0;
+left:50%;
+transform:translateX(-50%);
+width:70px;
+height:4px;
+border-radius:4px;
+background:linear-gradient(90deg,var(--blue),var(--green));
+}
+
+.stats{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+}
+
+.stat{
+background:var(--card);
+padding:30px;
+border-radius:20px;
+box-shadow:var(--shadow);
+text-align:center;
+position:relative;
+overflow:hidden;
+transition:.35s;
+opacity:0;
+transform:translateY(30px);
+}
+
+.stat::before{
+content:"";
+position:absolute;
+top:0;
+left:0;
+right:0;
+height:4px;
+background:linear-gradient(90deg,var(--blue),var(--green));
+}
+
+.stat:hover{
+transform:translateY(-8px);
+box-shadow:0 20px 40px rgba(2,154,214,.2);
+}
+
+.stat.in-view{
+opacity:1;
+transform:translateY(0);
+}
+
+.stat:hover{
+transform:translateY(-8px);
+}
+
+.stat h2{
+font-size:2.3rem;
+color:var(--blue);
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:25px;
+}
+
+.card{
+background:var(--card);
+padding:25px;
+border-radius:20px;
+box-shadow:var(--shadow);
+cursor:pointer;
+transition:.35s;
+opacity:0;
+transform:translateY(30px);
+}
+
+.card.in-view{
+opacity:1;
+transform:translateY(0);
+}
+
+.card:hover{
+transform:translateY(-8px);
+box-shadow:0 20px 40px rgba(2,154,214,.2);
+}
+
+.card h3{
+color:var(--blue);
+margin-bottom:10px;
+transition:.3s;
+}
+
+.card:hover h3{
+transform:translateX(4px);
+}
+
+.details{
+display:none;
+margin-top:15px;
+line-height:1.8;
+}
+
+.card.active .details{
+display:block;
+}
+
+.accordion{
+background:var(--card);
+margin-bottom:15px;
+border-radius:15px;
+overflow:hidden;
+box-shadow:var(--shadow);
+opacity:0;
+transform:translateY(30px);
+transition:.35s;
+}
+
+.accordion.in-view{
+opacity:1;
+transform:translateY(0);
+}
+
+.acc-head{
+padding:20px;
+font-weight:bold;
+cursor:pointer;
+background:var(--blue);
+color:white;
+display:flex;
+justify-content:space-between;
+align-items:center;
+transition:.3s;
+}
+
+.acc-head.green{
+background:var(--green);
+}
+
+.acc-head:hover{
+filter:brightness(1.08);
+}
+
+.acc-head::after{
+content:"+";
+font-size:1.4rem;
+line-height:1;
+transition:.3s;
+}
+
+.acc-head.open::after{
+transform:rotate(45deg);
+}
+
+.acc-content{
+display:none;
+padding:20px;
+line-height:2;
+}
+
+.timeline{
+list-style:none;
+border-left:3px solid var(--blue);
+padding-left:20px;
+}
+
+.acc-head.green ~ .acc-content .timeline{
+border-left-color:var(--green);
+}
+
+.timeline li{
+margin-bottom:14px;
+position:relative;
+}
+
+.timeline li::before{
+content:"";
+position:absolute;
+left:-25px;
+top:6px;
+width:10px;
+height:10px;
+border-radius:50%;
+background:var(--green);
+}
+
+.timeline li strong{
+color:var(--blue);
+}
+
+.locked-wrapper{
+position:relative;
+border-radius:20px;
+overflow:hidden;
+}
+
+.locked-content{
+filter:blur(8px);
+pointer-events:none;
+user-select:none;
+transition:filter .6s ease;
+}
+
+.locked-wrapper.unlocked .locked-content{
+filter:none;
+pointer-events:auto;
+user-select:auto;
+}
+
+.locked-overlay{
+position:absolute;
+inset:0;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+gap:8px;
+padding:20px;
+text-align:center;
+background:rgba(255,255,255,.4);
+backdrop-filter:blur(2px);
+cursor:pointer;
+transition:opacity .6s ease,visibility .6s ease;
+}
+
+.locked-wrapper.unlocked .locked-overlay{
+opacity:0;
+visibility:hidden;
+pointer-events:none;
+}
+
+.dark .locked-overlay{
+background:rgba(8,17,29,.5);
+}
+
+.lock-icon{
+font-size:3rem;
+animation:lockPulse 2s ease-in-out infinite;
+}
+
+.lock-icon.unlocking{
+animation:unlockShake .5s ease;
+}
+
+@keyframes unlockShake{
+0%{transform:rotate(0);}
+20%{transform:rotate(-15deg);}
+40%{transform:rotate(12deg);}
+60%{transform:rotate(-8deg);}
+80%{transform:rotate(5deg);}
+100%{transform:rotate(0) scale(1.3);}
+}
+
+.confetti-piece{
+position:absolute;
+top:50%;
+left:50%;
+font-size:1.4rem;
+pointer-events:none;
+animation:confettiBurst .9s ease-out forwards;
+}
+
+@keyframes confettiBurst{
+to{
+transform:translate(var(--tx),var(--ty)) rotate(var(--rot));
+opacity:0;
+}
+}
+
+.locked-overlay h3{
+font-size:1.8rem;
+background:linear-gradient(90deg,var(--blue),var(--green));
+-webkit-background-clip:text;
+background-clip:text;
+color:transparent;
+}
+
+.locked-overlay p{
+font-weight:600;
+color:var(--text);
+opacity:.85;
+}
+
+@keyframes lockPulse{
+0%,100%{transform:scale(1);}
+50%{transform:scale(1.15);}
+}
+
+.list{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+gap:20px;
+}
+
+.box{
+background:var(--card);
+padding:25px;
+border-radius:20px;
+box-shadow:var(--shadow);
+transition:.3s;
+opacity:0;
+transform:translateY(30px);
+}
+
+.box.in-view{
+opacity:1;
+transform:translateY(0);
+}
+
+.box:hover{
+transform:translateY(-6px);
+box-shadow:0 20px 40px rgba(0,0,0,.12);
+}
+
+.box ul{
+padding-left:20px;
+line-height:2;
+}
+
+.spocs{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+gap:20px;
+}
+
+.spoc{
+background:linear-gradient(135deg,var(--blue),var(--green));
+padding:25px;
+border-radius:18px;
+color:white;
+text-align:center;
+font-weight:600;
+transition:.3s;
+box-shadow:0 10px 25px rgba(2,154,214,.2);
+}
+
+.spoc:hover{
+transform:translateY(-6px) scale(1.03);
+box-shadow:0 20px 40px rgba(2,154,214,.35);
+}
+
+.memory-wall{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
+}
+
+.memory{
+background:var(--card);
+padding:25px;
+border-radius:20px;
+box-shadow:var(--shadow);
+font-weight:600;
+transition:.3s;
+}
+
+.memory:nth-child(odd){
+transform:rotate(-2deg);
+}
+
+.memory:nth-child(even){
+transform:rotate(2deg);
+}
+
+.memory:hover{
+transform:rotate(0) translateY(-6px) scale(1.04);
+box-shadow:0 20px 40px rgba(0,0,0,.15);
+}
+
+footer{
+background:linear-gradient(160deg,#0a1520,#050b12);
+color:white;
+text-align:center;
+padding:50px 20px;
+margin-top:50px;
+}
+
+footer h3{
+font-size:1.5rem;
+letter-spacing:1px;
+background:linear-gradient(90deg,var(--blue),var(--green));
+-webkit-background-clip:text;
+background-clip:text;
+color:transparent;
+margin-bottom:10px;
+}
+
+footer p{
+opacity:.75;
+max-width:600px;
+margin:8px auto 0;
+line-height:1.7;
+}
+
+@media(max-width:768px){
+
+.menu{
+display:none;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<nav>
+<div class="nav-container">
+<div class="logo">VERSA</div>
+
+<div class="menu">
+<a href="#places">Places</a>
+<a href="#itinerary">Itinerary</a>
+<a href="#packing">Packing</a>
+<a href="#flight">Flight</a>
+<a href="#spoc">SPOC</a>
+</div>
+
+<button class="theme-btn" id="themeBtn" onclick="toggleTheme()" aria-label="Toggle theme">🌙</button>
+</div>
+</nav>
+
+<section class="hero">
+
+<div class="hero-content">
+
+<h1>Meghalaya Adventure 2026</h1>
+
+<p>97 Adventurers • 5 Days • One Team</p>
+
+<div class="countdown" id="countdown"></div>
+
+</div>
+
+</section>
+
+<section class="section">
+
+<h2 class="title">Trip Dashboard</h2>
+
+<div class="digital-clock" id="digitalClock">
+<div class="clock-unit"><span id="cd-days">00</span><small>Days</small></div>
+<div class="clock-unit"><span id="cd-hours">00</span><small>Hours</small></div>
+<div class="clock-unit"><span id="cd-mins">00</span><small>Mins</small></div>
+<div class="clock-unit big"><span id="cd-secs">00</span><small>Secs</small></div>
+</div>
+
+<div class="stats">
+
+<div class="stat">
+<h2>97</h2>
+<span>Travelers</span>
+</div>
+
+<div class="stat">
+<h2>5</h2>
+<span>Days</span>
+</div>
+
+<div class="stat">
+<h2>10+</h2>
+<span>Destinations</span>
+</div>
+
+<div class="stat">
+<h2>∞</h2>
+<span>Memories</span>
+</div>
+
+</div>
+
+</section>
+
+<section id="places" class="section">
+
+<h2 class="title">Places We Explore</h2>
+
+<div class="grid">
+
+<div class="card" onclick="toggleCard(this)">
+<h3>🌊 Dawki</h3>
+<p>Click to Explore</p>
+<div class="details">
+Crystal clear Umngot River, boating, camping, bonfire and DJ night.
+</div>
+</div>
+
+<div class="card" onclick="toggleCard(this)">
+<h3>🏔 Shillong Peak</h3>
+<p>Click to Explore</p>
+<div class="details">
+Highest viewpoint in Shillong providing panoramic views.
+</div>
+</div>
+
+<div class="card" onclick="toggleCard(this)">
+<h3>🌳 Living Root Bridge</h3>
+<p>Click to Explore</p>
+<div class="details">
+Natural engineering marvel formed by living tree roots.
+</div>
+</div>
+
+<div class="card" onclick="toggleCard(this)">
+<h3>🌊 Umiam Lake</h3>
+<p>Click to Explore</p>
+<div class="details">
+Beautiful lake surrounded by hills and misty landscapes.
+</div>
+</div>
+
+<div class="card" onclick="toggleCard(this)">
+<h3>🪂 Mawkdok Bungee</h3>
+<p>Click to Explore</p>
+<div class="details">
+200 ft bungee jump over the Mawkdok Dympep Valley (pre-registered members only).
+</div>
+</div>
+
+<div class="card" onclick="toggleCard(this)">
+<h3>🍃 Mawlynnong</h3>
+<p>Click to Explore</p>
+<div class="details">
+Asia's Cleanest Village with a scenic sky walk, bamboo dustbins and flower-lined paths.
+</div>
+</div>
+
+<div class="card" onclick="toggleCard(this)">
+<h3>💦 Nohkalikai Falls</h3>
+<p>Click to Explore</p>
+<div class="details">
+Tallest plunge waterfall in India, a breathtaking single-drop cascade.
+</div>
+</div>
+
+<div class="card" onclick="toggleCard(this)">
+<h3>🏞 Seven Sisters Falls</h3>
+<p>Click to Explore</p>
+<div class="details">
+Iconic multi-tiered waterfall view, one of Meghalaya's most photographed spots.
+</div>
+</div>
+
+<div class="card" onclick="toggleCard(this)">
+<h3>🕳 Mawsmai Cave</h3>
+<p>Click to Explore</p>
+<div class="details">
+Easy 150m limestone cave walk with narrow passages and natural formations.
+</div>
+</div>
+
+<div class="card" onclick="toggleCard(this)">
+<h3>🐘 Elephant Falls</h3>
+<p>Click to Explore</p>
+<div class="details">
+Easy walk to a stunning 3-tiered waterfall, perfect for a quick scenic stop.
+</div>
+</div>
+
+<div class="card" onclick="toggleCard(this)">
+<h3>⛵ Wards Lake</h3>
+<p>Click to Explore</p>
+<div class="details">
+Peaceful lakeside walk in Shillong with optional boating before departure.
+</div>
+</div>
+
+</div>
+
+</section>
+
+<section id="itinerary" class="section">
+
+<h2 class="title">Interactive Itinerary</h2>
+
+<div class="locked-wrapper">
+
+<div class="locked-content">
+
+<div class="accordion">
+<div class="acc-head" onclick="openAcc(this)">DAY 1 · SEP 23 – ARRIVAL DAY</div>
+<div class="acc-content">
+<ul class="timeline">
+<li><strong>08:15 AM</strong> – Group A lands in Guwahati. Board buses, breakfast on the road.</li>
+<li>Group B lands in Guwahati. Convoy with Group A.</li>
+<li>Umiam Lake – Boating & Views. En-route stop, 45 mins. Misty hills, tea stalls.</li>
+<li>Group C arrives Shillong. Early check-in at Alpine Continental.</li>
+<li>All 97 check in – Alpine Continental. Freshen up, rest, regroup.</li>
+<li>Police Bazar Market Walk – shopping & local snacks.</li>
+<li>Welcome Dinner – Meghalayan cuisine (Jadoh, Doh Khlieh & more).</li>
+</ul>
+</div>
+</div>
+
+<div class="accordion">
+<div class="acc-head green" onclick="openAcc(this)">DAY 2 · SEP 24 – CHERRAPUNJI DAY</div>
+<div class="acc-content">
+<ul class="timeline">
+<li><strong>08:00 AM</strong> – After breakfast, depart for Cherrapunji.</li>
+<li>Elephant Falls – Easy walk, 3-tiered beauty.</li>
+<li>Shillong Peak – Drive up, panoramic views.</li>
+<li>Mawkdok – Bungee Jump (200 ft) (Pre-registered members only).</li>
+<li>Nohkalikai Falls – Tallest plunge waterfall in India.</li>
+<li>Seven Sisters Falls – Iconic multi-tiered view.</li>
+<li>Mawsmai Cave – Easy 150m cave walk.</li>
+<li>Return to Shillong.</li>
+<li>Dinner & Relax.</li>
+</ul>
+</div>
+</div>
+
+<div class="accordion">
+<div class="acc-head" onclick="openAcc(this)">DAY 3 · SEP 25 – DAWKI CAMPING NIGHT</div>
+<div class="acc-content">
+<ul class="timeline">
+<li><strong>07:00 AM</strong> – Early breakfast & partial checkout.</li>
+<li>Arrive Dawki – Umngot River.</li>
+<li>Boat rides – crystal clear water!</li>
+<li>Riverside lunch & free time.</li>
+<li>Corporate team games & activities.</li>
+<li>Bonfire BBQ dinner – DJ & music.</li>
+<li>Camping under the stars by the river / Bangladesh Border Scenic Drive – panoramic drive on the river bank.</li>
+</ul>
+</div>
+</div>
+
+<div class="accordion">
+<div class="acc-head green" onclick="openAcc(this)">DAY 4 · SEP 26 – MAWLYNNONG & BACK TO SHILLONG</div>
+<div class="acc-content">
+<ul class="timeline">
+<li><strong>06:00 AM</strong> – Sunrise at Dawki (Optional early morning boat ride).</li>
+<li>Breakfast & depart.</li>
+<li>Mawlynnong – Asia's Cleanest Village. Sky Walk – Flat & scenic. Bamboo dustbins, flower-lined paths.</li>
+<li>Riwai Living Root Bridge – easy trek to a natural marvel.</li>
+<li>Check-in – Alpine Continental, Shillong.</li>
+<li>Grand Farewell Dinner. Speeches, awards, memories!</li>
+</ul>
+</div>
+</div>
+
+<div class="accordion">
+<div class="acc-head" onclick="openAcc(this)">DAY 5 · SEP 27 – HOMEWARD BOUND</div>
+<div class="acc-content">
+<ul class="timeline">
+<li><strong>07:06 AM</strong> – Breakfast & Checkout.</li>
+<li>Wards Lake – peaceful walk & optional boating.</li>
+<li>Depart Shillong. 3.5 hr drive to Guwahati Airport via NH6.</li>
+<li>Guwahati Airport. Lunch, check-in, security, lounge.</li>
+<li>Flights Depart – All groups fly home. Safe travels, team!</li>
+</ul>
+</div>
+</div>
+
+</div>
+
+<div class="locked-overlay" onclick="unlockItinerary(this)">
+<div class="lock-icon">🔒</div>
+<h3>Coming Soon</h3>
+<p>Tap the lock to unlock the itinerary!</p>
+</div>
+
+</div>
+
+</section>
+
+<section id="packing" class="section">
+
+<h2 class="title">Things To Carry</h2>
+
+<div class="list">
+
+<div class="box">
+<h3>🌧 Essentials</h3>
+<ul>
+<li>Raincoat</li>
+<li>Umbrella</li>
+<li>Waterproof Shoes</li>
+<li>Extra Socks</li>
+<li>Power Bank</li>
+</ul>
+</div>
+
+<div class="box">
+<h3>💊 Health</h3>
+<ul>
+<li>Medicines</li>
+<li>Mosquito Repellent</li>
+<li>ORS</li>
+<li>Salt Packet</li>
+</ul>
+</div>
+
+</div>
+
+</section>
+
+<section id="flight" class="section">
+
+<h2 class="title">Baggage & Flight Guide</h2>
+
+<div class="list">
+
+<div class="box">
+<h3>🧳 Hand Luggage</h3>
+<p><strong>Maximum 7 KG</strong></p>
+<ul>
+<li>Phone</li>
+<li>Power Bank</li>
+<li>ID Proof</li>
+<li>Medicines</li>
+<li>Raincoat</li>
+</ul>
+</div>
+
+<div class="box">
+<h3>🛄 Check-In Luggage</h3>
+<p><strong>Maximum 15 KG</strong></p>
+<ul>
+<li>Clothes</li>
+<li>Shoes</li>
+<li>Toiletries</li>
+<li>Extra Clothes</li>
+</ul>
+</div>
+
+</div>
+
+</section>
+
+<section id="spoc" class="section">
+
+<h2 class="title">SPOC Team</h2>
+
+<div class="spocs">
+
+<div class="spoc">Azmal Babulal</div>
+<div class="spoc">Shyamala Chandramouleeswaran</div>
+<div class="spoc">John Jayanth Devadasan</div>
+<div class="spoc">Bhuvaneshwaran Sathiyamoorthy</div>
+<div class="spoc">Ashwin Devendiran</div>
+<div class="spoc">Dinesh Ravichandran</div>
+<div class="spoc">Vinoth Kumar Mohan</div>
+<div class="spoc">Aishwarya Lakshmi Vijayakumar</div>
+
+</div>
+
+</section>
+
+<section class="section">
+<h2 class="title">❤️ Memory Wall</h2>
+
+<div class="memory-wall">
+
+<div class="memory">"Can't wait for Dawki!"</div>
+<div class="memory">"First Flight Experience!"</div>
+<div class="memory">"Bonfire Night Loading..."</div>
+<div class="memory">"Let's Create Memories Together"</div>
+
+</div>
+
+</section>
+
+<footer>
+
+<h3>VERSA MEGHALAYA ADVENTURE</h3>
+
+<p>23 Sep - 27 Sep</p>
+
+<p>
+All activities are subject to weather, road conditions and operational feasibility.
+Coordinator decisions are final for participant safety.
+</p>
+
+</footer>
+
+<script>
+
+function toggleTheme(){
+document.body.classList.toggle("dark");
+document.getElementById("themeBtn").textContent=
+document.body.classList.contains("dark")?"☀️":"🌙";
+}
+
+function toggleCard(card){
+card.classList.toggle("active");
+}
+
+function openAcc(el){
+let c=el.nextElementSibling;
+let isOpen=c.style.display==="block";
+c.style.display=isOpen?"none":"block";
+el.classList.toggle("open",!isOpen);
+}
+
+function unlockItinerary(el){
+const wrapper=el.closest(".locked-wrapper");
+if(wrapper.classList.contains("unlocked"))return;
+
+const icon=el.querySelector(".lock-icon");
+icon.classList.add("unlocking");
+icon.textContent="🔓";
+
+const pieces=["✨","🎉","💎","🔓"];
+for(let i=0;i<18;i++){
+const piece=document.createElement("span");
+piece.className="confetti-piece";
+piece.textContent=pieces[Math.floor(Math.random()*pieces.length)];
+const angle=Math.random()*2*Math.PI;
+const distance=80+Math.random()*100;
+piece.style.setProperty("--tx",Math.cos(angle)*distance+"px");
+piece.style.setProperty("--ty",Math.sin(angle)*distance+"px");
+piece.style.setProperty("--rot",(Math.random()*360)+"deg");
+el.appendChild(piece);
+setTimeout(()=>piece.remove(),1000);
+}
+
+setTimeout(()=>{
+wrapper.classList.add("unlocked");
+},500);
+}
+
+const revealObserver=new IntersectionObserver(entries=>{
+entries.forEach(entry=>{
+if(entry.isIntersecting){
+entry.target.classList.add("in-view");
+revealObserver.unobserve(entry.target);
+}
+});
+},{threshold:.15});
+
+document.querySelectorAll(".stat,.card,.box,.accordion").forEach(el=>revealObserver.observe(el));
+
+const target=new Date("2026-09-23");
+setInterval(()=>{
+let diff=target-new Date();
+let days=Math.floor(diff/(1000*60*60*24));
+document.getElementById("countdown").innerHTML=
+days+" Days To Adventure";
+
+let hours=Math.floor((diff/(1000*60*60))%24);
+let mins=Math.floor((diff/(1000*60))%60);
+let secs=Math.floor((diff/1000)%60);
+
+document.getElementById("cd-days").textContent=String(Math.max(days,0)).padStart(2,"0");
+document.getElementById("cd-hours").textContent=String(Math.max(hours,0)).padStart(2,"0");
+document.getElementById("cd-mins").textContent=String(Math.max(mins,0)).padStart(2,"0");
+document.getElementById("cd-secs").textContent=String(Math.max(secs,0)).padStart(2,"0");
+},1000);
+
+</script>
+
+</body>
+</html>
