@@ -366,35 +366,84 @@ grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
 gap:25px;
 }
 
-.card{
-background:var(--card);
-padding:25px;
-border-radius:20px;
-box-shadow:var(--shadow);
+.flip-card{
 cursor:pointer;
-transition:.35s;
+min-height:380px;
+perspective:1500px;
 opacity:0;
 transform:translateY(30px);
+transition:opacity .35s,transform .35s;
 }
 
-.card.in-view{
+.flip-card.in-view{
 opacity:1;
 transform:translateY(0);
 }
 
-.card:hover{
-transform:translateY(-8px);
+.flip-inner{
+position:relative;
+width:100%;
+height:100%;
+min-height:380px;
+transition:transform .7s cubic-bezier(.4,.2,.2,1);
+transform-style:preserve-3d;
+}
+
+.flip-card.active .flip-inner{
+transform:rotateY(180deg);
+}
+
+.flip-front,.flip-back{
+position:absolute;
+inset:0;
+display:flex;
+flex-direction:column;
+padding:22px;
+box-sizing:border-box;
+border-radius:20px;
+backface-visibility:hidden;
+-webkit-backface-visibility:hidden;
+box-shadow:var(--shadow);
+}
+
+.flip-front{
+background:var(--card);
+border:1px solid rgba(2,154,214,.18);
+transition:box-shadow .35s;
+}
+
+.flip-card:hover .flip-front{
 box-shadow:0 20px 40px rgba(2,154,214,.2);
 }
 
-.card h3{
+.flip-back{
+background:linear-gradient(135deg,var(--blue),var(--green));
+color:#fff;
+border:1px solid rgba(255,255,255,.35);
+transform:rotateY(180deg);
+justify-content:center;
+overflow-y:auto;
+}
+
+.flip-front h3{
 color:var(--blue);
-margin-bottom:10px;
+margin-bottom:6px;
 transition:.3s;
 }
 
-.card:hover h3{
-transform:translateX(4px);
+.flip-front p{
+opacity:.65;
+font-size:.85rem;
+letter-spacing:.5px;
+}
+
+.flip-back h3{
+margin-bottom:12px;
+}
+
+.flip-back p{
+line-height:1.8;
+opacity:.95;
 }
 
 .card-img{
@@ -409,6 +458,7 @@ display:flex;
 align-items:center;
 justify-content:center;
 box-shadow:inset 0 -40px 40px -20px rgba(0,0,0,.35);
+border:1px solid rgba(2,154,214,.2);
 }
 
 .card-img img{
@@ -419,7 +469,7 @@ display:block;
 transition:transform .5s ease;
 }
 
-.card:hover .card-img img{
+.flip-card:hover .card-img img{
 transform:scale(1.08);
 }
 
@@ -503,16 +553,6 @@ font-weight:600;
 text-align:center;
 padding:0 14px;
 opacity:.9;
-}
-
-.details{
-display:none;
-margin-top:15px;
-line-height:1.8;
-}
-
-.card.active .details{
-display:block;
 }
 
 .accordion{
@@ -903,124 +943,179 @@ display:none;
 
 <div class="grid">
 
-<div class="card" onclick="toggleCard(this)">
+<div class="flip-card" onclick="toggleCard(this)">
+<div class="flip-inner">
+<div class="flip-front">
 <div class="card-img" data-label="📷 Add images/places/dawki.jpg">
 <img src="images/places/dawki.jpg" alt="Dawki" onerror="this.style.display='none';this.parentElement.classList.add('no-img')">
 </div>
-<h3>🌊 Dawki</h3>
-<p>Click to Explore</p>
-<div class="details">
-Crystal clear Umngot River, boating, camping, bonfire and DJ night.
+<h3>Dawki</h3>
+<p>Tap to explore</p>
+</div>
+<div class="flip-back">
+<h3>Dawki</h3>
+<p>Crystal clear Umngot River, boating, camping, bonfire and DJ night.</p>
+</div>
 </div>
 </div>
 
-<div class="card" onclick="toggleCard(this)">
+<div class="flip-card" onclick="toggleCard(this)">
+<div class="flip-inner">
+<div class="flip-front">
 <div class="card-img" data-label="📷 Add images/places/shillong-peak.jpg">
 <img src="images/places/shillong-peak.jpg" alt="Shillong Peak" onerror="this.style.display='none';this.parentElement.classList.add('no-img')">
 </div>
-<h3>🏔 Shillong Peak</h3>
-<p>Click to Explore</p>
-<div class="details">
-Highest viewpoint in Shillong providing panoramic views.
+<h3>Shillong Peak</h3>
+<p>Tap to explore</p>
+</div>
+<div class="flip-back">
+<h3>Shillong Peak</h3>
+<p>Highest viewpoint in Shillong providing panoramic views.</p>
+</div>
 </div>
 </div>
 
-<div class="card" onclick="toggleCard(this)">
+<div class="flip-card" onclick="toggleCard(this)">
+<div class="flip-inner">
+<div class="flip-front">
 <div class="card-img" data-label="📷 Add images/places/living-root-bridge.jpg">
 <img src="images/places/living-root-bridge.jpg" alt="Living Root Bridge" onerror="this.style.display='none';this.parentElement.classList.add('no-img')">
 </div>
-<h3>🌳 Living Root Bridge</h3>
-<p>Click to Explore</p>
-<div class="details">
-Natural engineering marvel formed by living tree roots.
+<h3>Living Root Bridge</h3>
+<p>Tap to explore</p>
+</div>
+<div class="flip-back">
+<h3>Living Root Bridge</h3>
+<p>Natural engineering marvel formed by living tree roots.</p>
+</div>
 </div>
 </div>
 
-<div class="card" onclick="toggleCard(this)">
+<div class="flip-card" onclick="toggleCard(this)">
+<div class="flip-inner">
+<div class="flip-front">
 <div class="card-img" data-label="📷 Add images/places/umiam-lake.jpg">
 <img src="images/places/umiam-lake.jpg" alt="Umiam Lake" onerror="this.style.display='none';this.parentElement.classList.add('no-img')">
 </div>
-<h3>🌊 Umiam Lake</h3>
-<p>Click to Explore</p>
-<div class="details">
-Beautiful lake surrounded by hills and misty landscapes.
+<h3>Umiam Lake</h3>
+<p>Tap to explore</p>
+</div>
+<div class="flip-back">
+<h3>Umiam Lake</h3>
+<p>Beautiful lake surrounded by hills and misty landscapes.</p>
+</div>
 </div>
 </div>
 
-<div class="card" onclick="toggleCard(this)">
+<div class="flip-card" onclick="toggleCard(this)">
+<div class="flip-inner">
+<div class="flip-front">
 <div class="card-img" data-label="📷 Add images/places/mawkdok-bungee.jpg">
-<img src="images/places/mawkdok-bungee.jpg" alt="Mawkdok Bungee" onerror="this.style.display='none';this.parentElement.classList.add('no-img')">
+<img src="images/places/mawkdok-bungee.avif" alt="Mawkdok Bungee" onerror="this.style.display='none';this.parentElement.classList.add('no-img')">
 </div>
-<h3>🪂 Mawkdok Bungee</h3>
-<p>Click to Explore</p>
-<div class="details">
-200 ft bungee jump over the Mawkdok Dympep Valley (pre-registered members only).
+<h3>Mawkdok Bungee</h3>
+<p>Tap to explore</p>
+</div>
+<div class="flip-back">
+<h3>Mawkdok Bungee</h3>
+<p>200 ft bungee jump over the Mawkdok Dympep Valley (pre-registered members only).</p>
+</div>
 </div>
 </div>
 
-<div class="card" onclick="toggleCard(this)">
+<div class="flip-card" onclick="toggleCard(this)">
+<div class="flip-inner">
+<div class="flip-front">
 <div class="card-img" data-label="📷 Add images/places/mawlynnong.jpg">
 <img src="images/places/mawlynnong.jpg" alt="Mawlynnong" onerror="this.style.display='none';this.parentElement.classList.add('no-img')">
 </div>
-<h3>🍃 Mawlynnong</h3>
-<p>Click to Explore</p>
-<div class="details">
-Asia's Cleanest Village with a scenic sky walk, bamboo dustbins and flower-lined paths.
+<h3>Mawlynnong</h3>
+<p>Tap to explore</p>
+</div>
+<div class="flip-back">
+<h3>Mawlynnong</h3>
+<p>Asia's Cleanest Village with a scenic sky walk, bamboo dustbins and flower-lined paths.</p>
+</div>
 </div>
 </div>
 
-<div class="card" onclick="toggleCard(this)">
+<div class="flip-card" onclick="toggleCard(this)">
+<div class="flip-inner">
+<div class="flip-front">
 <div class="card-img" data-label="📷 Add images/places/nohkalikai-falls.jpg">
 <img src="images/places/nohkalikai-falls.jpg" alt="Nohkalikai Falls" onerror="this.style.display='none';this.parentElement.classList.add('no-img')">
 </div>
-<h3>💦 Nohkalikai Falls</h3>
-<p>Click to Explore</p>
-<div class="details">
-Tallest plunge waterfall in India, a breathtaking single-drop cascade.
+<h3>Nohkalikai Falls</h3>
+<p>Tap to explore</p>
+</div>
+<div class="flip-back">
+<h3>Nohkalikai Falls</h3>
+<p>Tallest plunge waterfall in India, a breathtaking single-drop cascade.</p>
+</div>
 </div>
 </div>
 
-<div class="card" onclick="toggleCard(this)">
+<div class="flip-card" onclick="toggleCard(this)">
+<div class="flip-inner">
+<div class="flip-front">
 <div class="card-img" data-label="📷 Add images/places/seven-sisters-falls.jpg">
 <img src="images/places/seven-sisters-falls.jpg" alt="Seven Sisters Falls" onerror="this.style.display='none';this.parentElement.classList.add('no-img')">
 </div>
-<h3>🏞 Seven Sisters Falls</h3>
-<p>Click to Explore</p>
-<div class="details">
-Iconic multi-tiered waterfall view, one of Meghalaya's most photographed spots.
+<h3>Seven Sisters Falls</h3>
+<p>Tap to explore</p>
+</div>
+<div class="flip-back">
+<h3>Seven Sisters Falls</h3>
+<p>Iconic multi-tiered waterfall view, one of Meghalaya's most photographed spots.</p>
+</div>
 </div>
 </div>
 
-<div class="card" onclick="toggleCard(this)">
+<div class="flip-card" onclick="toggleCard(this)">
+<div class="flip-inner">
+<div class="flip-front">
 <div class="card-img" data-label="📷 Add images/places/mawsmai-cave.jpg">
 <img src="images/places/mawsmai-cave.jpg" alt="Mawsmai Cave" onerror="this.style.display='none';this.parentElement.classList.add('no-img')">
 </div>
-<h3>🕳 Mawsmai Cave</h3>
-<p>Click to Explore</p>
-<div class="details">
-Easy 150m limestone cave walk with narrow passages and natural formations.
+<h3>Mawsmai Cave</h3>
+<p>Tap to explore</p>
+</div>
+<div class="flip-back">
+<h3>Mawsmai Cave</h3>
+<p>Easy 150m limestone cave walk with narrow passages and natural formations.</p>
+</div>
 </div>
 </div>
 
-<div class="card" onclick="toggleCard(this)">
+<div class="flip-card" onclick="toggleCard(this)">
+<div class="flip-inner">
+<div class="flip-front">
 <div class="card-img" data-label="📷 Add images/places/elephant-falls.jpg">
 <img src="images/places/elephant-falls.jpg" alt="Elephant Falls" onerror="this.style.display='none';this.parentElement.classList.add('no-img')">
 </div>
-<h3>🐘 Elephant Falls</h3>
-<p>Click to Explore</p>
-<div class="details">
-Easy walk to a stunning 3-tiered waterfall, perfect for a quick scenic stop.
+<h3>Elephant Falls</h3>
+<p>Tap to explore</p>
+</div>
+<div class="flip-back">
+<h3>Elephant Falls</h3>
+<p>Easy walk to a stunning 3-tiered waterfall, perfect for a quick scenic stop.</p>
+</div>
 </div>
 </div>
 
-<div class="card" onclick="toggleCard(this)">
+<div class="flip-card" onclick="toggleCard(this)">
+<div class="flip-inner">
+<div class="flip-front">
 <div class="card-img" data-label="📷 Add images/places/wards-lake.jpg">
 <img src="images/places/wards-lake.jpg" alt="Wards Lake" onerror="this.style.display='none';this.parentElement.classList.add('no-img')">
 </div>
-<h3>⛵ Wards Lake</h3>
-<p>Click to Explore</p>
-<div class="details">
-Peaceful lakeside walk in Shillong with optional boating before departure.
+<h3>Wards Lake</h3>
+<p>Tap to explore</p>
+</div>
+<div class="flip-back">
+<h3>Wards Lake</h3>
+<p>Peaceful lakeside walk in Shillong with optional boating before departure.</p>
+</div>
 </div>
 </div>
 
@@ -1321,7 +1416,7 @@ revealObserver.unobserve(entry.target);
 });
 },{threshold:.15});
 
-document.querySelectorAll(".stat,.card,.box,.accordion,.gallery-item").forEach(el=>revealObserver.observe(el));
+document.querySelectorAll(".stat,.flip-card,.box,.accordion,.gallery-item").forEach(el=>revealObserver.observe(el));
 
 const target=new Date("2026-09-23");
 setInterval(()=>{
