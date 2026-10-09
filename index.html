@@ -1115,13 +1115,13 @@ display:none;
 <div class="logo">VERSA</div>
 
 <div class="menu">
+<a href="#memories">Memories</a>
 <a href="#places">Places</a>
 <a href="#itinerary">Itinerary</a>
 <a href="#gallery">Gallery</a>
 <a href="#packing">Packing</a>
 <a href="#flight">Flight</a>
 <a href="#spoc">SPOC</a>
-<a href="#memories">Memories</a>
 </div>
 
 <button class="theme-btn" id="themeBtn" onclick="toggleTheme()" aria-label="Toggle theme">🌙</button>
@@ -1142,6 +1142,24 @@ display:none;
 
 <div class="countdown" id="countdown"></div>
 
+</div>
+
+</section>
+
+<section id="memories" class="section">
+<h2 class="title">❤️ Memory Wall</h2>
+
+<div class="wall-toolbar">
+<button class="btn" id="addMemoryBtn" onclick="openUpload()">📸 Pin a Memory</button>
+<button class="btn ghost" onclick="loadMemories()" aria-label="Refresh">⟳</button>
+</div>
+
+<p class="wall-status" id="wallStatus"></p>
+
+<div class="memory-wall" id="memoryWall"></div>
+
+<div class="wall-more">
+<button class="btn ghost" id="showMoreBtn" onclick="showMore()" style="display:none">Show more memories</button>
 </div>
 
 </section>
@@ -1576,24 +1594,6 @@ display:none;
 <img src="images/gallery/photo6.jpg" alt="Trip photo 6" onerror="this.style.display='none';this.parentElement.classList.add('no-img')">
 </div>
 
-</div>
-
-</section>
-
-<section id="memories" class="section">
-<h2 class="title">❤️ Memory Wall</h2>
-
-<div class="wall-toolbar">
-<button class="btn" id="addMemoryBtn" onclick="openUpload()">📸 Pin a Memory</button>
-<button class="btn ghost" onclick="loadMemories()" aria-label="Refresh">⟳</button>
-</div>
-
-<p class="wall-status" id="wallStatus"></p>
-
-<div class="memory-wall" id="memoryWall"></div>
-
-<div class="wall-more">
-<button class="btn ghost" id="showMoreBtn" onclick="showMore()" style="display:none">Show more memories</button>
 </div>
 
 </section>
